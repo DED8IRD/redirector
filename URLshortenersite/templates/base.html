@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		(re)director | {% block title %}{% endblock title %} 
+	</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{% block main_styles %}
+		<link rel="shortcut icon" href="{% static 'URLshortener/images/fav.ico' %}">	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'URLshortener/css/main.css' %}">
+	{% endblock main_styles %}
+
+	{% block styles %}{% endblock styles %}
+	{% block scripts %}{% endblock scripts %}
+</head>
+<body>
+	{% block nav %}
+		<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler" aria-controls="toggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="toggler">
+				<a class="navbar-brand" href="#">
+					<img src="{% static 'URLshortener/images/fav.ico' %}" width="30px" height="30px" alt="re(director) icon" />
+					(re)director
+				</a>
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+						<a class="nav-link" href="{% url 'URLshortener:index' %}">Home<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'URLshortener:links' %}">Your links</a> 
+					</li>
+					{% if user.is_authenticated %}
+						<li>
+							<a class="nav-link" href="{% url 'logout' %}">Logout</a> 							
+						</li>
+					{% else %}
+						<li>
+							<a class="nav-link" href="{% url 'login' %}">Login</a> 							
+						</li>
+						<li>
+							<a class="nav-link" href="{% url 'register' %}">Register</a> 							
+						</li>											
+					{% endif %}
+				</ul>
+			</div>
+		</nav>
+	{% endblock nav %}
+	
+	{% block content %}	
+	{% endblock content %}
+
+	{% block main_scripts %}
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
+	{% endblock main_scripts %}
+
+	{% block body_scripts %}{% endblock body_scripts %}
+</body>
+</html>

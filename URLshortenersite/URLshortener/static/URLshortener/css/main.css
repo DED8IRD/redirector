@@ -1,0 +1,47 @@
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+body { 
+	padding-top: 50px; 
+	background-image: url('../images/movie-set.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.table {
+	margin: auto;
+	background-color: white;
+	max-width: 100%;
+	max-width: 920px;
+	border-radius: 10px;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    vertical-align: middle;
+	backdrop-filter: blur(5px) contrast(.8);
+}
+
+.form-container {
+	opacity: 90%;
+	background-color: white;
+}
+
+.main-form {
+	align-self: center;
+}
+
+.main-input {
+	height: 60px;
+}
+
+.warning {
+	background-color: darkred;
+	color: white;
+}

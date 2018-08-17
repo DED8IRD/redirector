@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Links{% endblock title %}
+{% block content %}
+	{% if links %}
+		<div class="table-responsive-sm">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">URL</th>
+						<th scope="col">Shortened</th>
+						<th scope="col">Clicks</th>
+						<th scope="col">Delete</th>				
+					</tr>
+				</thead>
+				{% for link in links %}
+					<tr>
+						<td>
+							<input type="text" class="form-control copy-input"
+										value="{{ link.url.url }}" 
+										placeholder="{{ link.url.url }}" disabled />
+						</td>
+						<td>
+							<div class="input-group input-group-sm">
+								<input type="text" class="form-control copy-input"
+										value="{{ base }}{{ link.url.code }}" 
+										placeholder="{{ base }}{{ link.url.code }}" />
+								<div class="input-group-append">
+								    <button class="btn btn-outline-secondary copy-button" type="button" 
+											data-toggle="tooltip" data-placement="bottom"
+											title="Copy to Clipboard">								    
+								    	Copy
+								    </button>
+								</div>
+							</div>
+						</td>			
+						<td>{{ link.url.access_count }}</td>			
+						<td>
+							<a href="{% url 'URLshortener:delete' link.pk %}" >
+								<button type="button" class="btn btn-danger">Delete</button>
+							</a>						
+						</td>			
+					</tr>
+				{% endfor %}
+			</table>		
+		</div>
+	{% else %}
+		<p>You have no saved links.</p>	
+	{% endif %}
+{% endblock content %}
+
+{% block body_scripts %}
+	<script src="{% static 'URLshortener/js/index.js' %}"></script>	
+{% endblock body_scripts %}
