@@ -21,14 +21,14 @@
 <body>
 	{% block nav %}
 		<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">
+				<img src="{% static 'URLshortener/images/fav.ico' %}" width="30px" height="30px" alt="re(director) icon" />
+				(re)director
+			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler" aria-controls="toggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="toggler">
-				<a class="navbar-brand" href="#">
-					<img src="{% static 'URLshortener/images/fav.ico' %}" width="30px" height="30px" alt="re(director) icon" />
-					(re)director
-				</a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item active">
 						<a class="nav-link" href="{% url 'URLshortener:index' %}">Home<span class="sr-only">(current)</span></a>
