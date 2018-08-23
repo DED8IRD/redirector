@@ -3,8 +3,8 @@
 
 {% block title %}Links{% endblock title %}
 {% block content %}
-	{% if links %}
-		<div class="table-responsive-sm">
+	<div class="table-responsive-sm">
+		{% if links %}
 			<table class="table">
 				<thead>
 					<tr>
@@ -18,11 +18,11 @@
 					<tr>
 						<td>
 							<input type="text" class="form-control copy-input"
-										value="{{ link.url.url }}" 
+										value="{{ link.url.url }}" title="{{ link.url.url }}"
 										placeholder="{{ link.url.url }}" disabled />
 						</td>
 						<td>
-							<div class="input-group input-group-sm">
+							<div class="input-group">
 								<input type="text" class="form-control copy-input"
 										value="{{ base }}{{ link.url.code }}" 
 										placeholder="{{ base }}{{ link.url.code }}" />
@@ -44,10 +44,12 @@
 					</tr>
 				{% endfor %}
 			</table>		
-		</div>
-	{% else %}
-		<p>You have no saved links.</p>	
-	{% endif %}
+		{% else %}
+			<table class="table">
+				<p>You have no saved links.</p>
+			</table>	
+		{% endif %}
+	</div>
 {% endblock content %}
 
 {% block body_scripts %}

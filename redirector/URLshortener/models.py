@@ -11,7 +11,8 @@ class URL(models.Model):
 	def __str__(self):
 		return f'{self.url}-{self.code}'
 
-class SavedLink(models.Model):
+
+class UserSavedLink(models.Model):
 	url = models.ForeignKey(URL, on_delete='CASCADE')
 	user = models.ForeignKey(User, on_delete='CASCADE')
 

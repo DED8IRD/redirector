@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.conf import settings
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 import random
 
-from .models import URL, SavedLink
+from .models import URL, UserSavedLink
 from .forms import URLForm
 
 def index(request):
@@ -32,15 +32,6 @@ def index(request):
     return render(request, 'URLshortener/index.html', context)
 
 
-@login_required
-def links(request):
-    context = {
-        'links': SavedLink.objects.filter(user=request.user),
-        'base': settings.BASE_URL
-    }
-    return render(request, 'URLshortener/user_links.html', context)
-
-
 def shortened_redirect(request, code):
     url = get_object_or_404(URL, code=code)
     url.access_count += 1
@@ -49,15 +40,24 @@ def shortened_redirect(request, code):
 
 
 @login_required
+def links(request):
+    context = {
+        'links': UserSavedLink.objects.filter(user=request.user),
+        'base': settings.BASE_URL
+    }
+    return render(request, 'URLshortener/user-links.html', context)
+
+
+@permission_required('URLshortener.add_usersavedlink')
 def save_link(request, code):
     url = get_object_or_404(URL, code=code)
-    SavedLink(url=url, user=request.user).save()
+    UserSavedLink(url=url, user=request.user).save()
     return redirect('URLshortener:links')
 
 
-@login_required
+@permission_required('URLshortener.delete_usersavedlink')
 def delete_link(request, pk):
-    get_object_or_404(SavedLink, pk=pk).delete()
+    get_object_or_404(UserSavedLink, pk=pk).delete()
     return redirect('URLshortener:links')
 
 
@@ -77,3 +77,13 @@ def shorten_url(url):
         code = ''.join(random.choices(valid_chars, k=6))
         if not URL.objects.filter(code=code).exists():
             return code
+
+
+def get_ip_address(request):
+    """ use requestobject to fetch client machine's IP Address """
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')    ### Real IP address of client Machine
+    return ip   
