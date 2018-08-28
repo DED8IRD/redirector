@@ -3,52 +3,56 @@
 
 {% block title %}Links{% endblock title %}
 {% block content %}
-	<div class="table-responsive-sm">
-		{% if links %}
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">URL</th>
-						<th scope="col">Shortened</th>
-						<th scope="col">Clicks</th>
-						<th scope="col">Delete</th>				
-					</tr>
-				</thead>
-				{% for link in links %}
-					<tr>
-						<td>
-							<input type="text" class="form-control copy-input"
-										value="{{ link.url.url }}" title="{{ link.url.url }}"
-										placeholder="{{ link.url.url }}" disabled />
-						</td>
-						<td>
-							<div class="input-group">
+	<div class="container">
+		<div class="table-responsive-sm">
+			{% if links %}
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">URL</th>
+							<th scope="col">Shortened</th>
+							<th scope="col">Clicks</th>
+							<th scope="col">Delete</th>				
+						</tr>
+					</thead>
+					{% for link in links %}
+						<tr>
+							<td>
 								<input type="text" class="form-control copy-input"
-										value="{{ base }}{{ link.url.code }}" 
-										placeholder="{{ base }}{{ link.url.code }}" />
-								<div class="input-group-append">
-								    <button class="btn btn-outline-secondary copy-button" type="button" 
-											data-toggle="tooltip" data-placement="bottom"
-											title="Copy to Clipboard">								    
-								    	Copy
-								    </button>
+											value="{{ link.url.url }}" title="{{ link.url.url }}"
+											placeholder="{{ link.url.url }}" disabled />
+							</td>
+							<td>
+								<div class="input-group">
+									<input type="text" class="form-control copy-input"
+											value="{{ base }}{{ link.url.code }}" 
+											placeholder="{{ base }}{{ link.url.code }}" />
+									<div class="input-group-append">
+									    <button class="btn btn-outline-secondary copy-button" type="button" 
+												data-toggle="tooltip" data-placement="bottom"
+												title="Copy to Clipboard">								    
+									    	Copy
+									    </button>
+									</div>
 								</div>
-							</div>
-						</td>			
-						<td>{{ link.url.access_count }}</td>			
-						<td>
-							<a href="{% url 'URLshortener:delete' link.pk %}" >
-								<button type="button" class="btn btn-danger">Delete</button>
-							</a>						
-						</td>			
+							</td>			
+							<td>{{ link.url.access_count }}</td>			
+							<td>
+								<a href="{% url 'URLshortener:delete' link.pk %}" >
+									<button type="button" class="btn btn-danger">Delete</button>
+								</a>						
+							</td>			
+						</tr>
+					{% endfor %}
+				</table>		
+			{% else %}
+				<table class="table">
+					<tr>
+						<td>You have no saved links.</td>
 					</tr>
-				{% endfor %}
-			</table>		
-		{% else %}
-			<table class="table">
-				<p>You have no saved links.</p>
-			</table>	
-		{% endif %}
+				</table>	
+			{% endif %}
+		</div>
 	</div>
 {% endblock content %}
 

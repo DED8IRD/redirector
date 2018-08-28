@@ -5,6 +5,19 @@
 {% block content %}
 	<div class="container form-container w-100 h-100">
 	    <form name="LoginForm"  method="post">
+
+			{% if next %}
+			  	{% if user.is_authenticated %}
+					<div class="alert alert-danger" role="alert">
+					    Your account doesn't have access to this page. To proceed, please login with an account that has access.
+					</div>
+			  	{% else %}
+					<div class="alert alert-warning" role="alert">
+				    	Please login to see this page.
+			    	</div>
+			  	{% endif %}
+			{% endif %}
+
 		    {% csrf_token %}
 			{{ form|as_bootstrap }}
 			<button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>			

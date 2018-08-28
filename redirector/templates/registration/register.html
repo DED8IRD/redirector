@@ -5,6 +5,14 @@
 {% block content %}
 	<div class="container form-container w-100 h-100 input-group">
 		<form action="{% url 'register' %}" method='POST'>
+			{% if form.errors %}
+				{% for error in form.errors %}
+					<div class="alert alert-danger" role="alert">
+						{{ error }}
+					</div>	  
+				{% endfor %}
+			{% endif %}
+
 			{% csrf_token %}
 			{{ form|as_bootstrap }}
 			<br />

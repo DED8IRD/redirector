@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'URLshortener.apps.UrlshortenerConfig',
+    'social_django',
+    'rest_framework',
     'django_forms_bootstrap',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,7 +62,8 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
