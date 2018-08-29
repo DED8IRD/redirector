@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from util import keys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,8 +20,16 @@ BASE_URL = 'localhost:8000/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
+# Keys
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7gp_ro!blzw()m*p7yz=sv4(_foe3bawg8m)9l-m$!7q$z&_ei'
+SECRET_KEY = keys.SECRET_KEY
+
+# Social OAuth Config
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# OAuth keys
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = keys.GOOGLE_CLIENT_ID 
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = keys.GOOGLE_CLIENT_SECRET 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -141,5 +150,6 @@ STATICFILES_DIRS = (
 
 
 # Redirect URLS
+LOGIN_URL = '/auth/login/google-oauth2/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
