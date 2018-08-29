@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('accounts/', include('django.contrib.auth.urls')),
 	path('accounts/register/', views.register, name='register'),
+    path('auth/', include('social_django.urls', namespace='social')),
 	path('', include('URLshortener.urls')),
 ]
