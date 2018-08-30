@@ -60,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',    
 ]
 
 ROOT_URLCONF = 'redirector.urls'
@@ -151,5 +152,6 @@ STATICFILES_DIRS = (
 
 # Redirect URLS
 LOGIN_URL = '/auth/login/google-oauth2/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

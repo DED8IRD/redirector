@@ -1,12 +1,29 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from rest_framework import viewsets
 import random
 
 from .models import URL, UserSavedLink
+from .serializers import URLSerializer, UserSavedLinkSerializer
 from .forms import URLForm
+
+class URLViewSet(viewsets.ModelViewSet):
+    """
+    API viewset for viewing URL instances.
+    """
+    queryset = URL.objects.all()
+    serializer_class = URLSerializer
+
+class UserSavedLinkViewSet(viewsets.ModelViewSet):
+    """
+    API viewset for viewing user saved link instances.
+    """
+    queryset = UserSavedLink.objects.all()
+    serializer_class = UserSavedLinkSerializer
+
 
 def index(request):
     link = None
@@ -48,14 +65,14 @@ def links(request):
     return render(request, 'URLshortener/user-links.html', context)
 
 
-@permission_required('URLshortener.add_usersavedlink')
+@login_required
 def save_link(request, code):
     url = get_object_or_404(URL, code=code)
     UserSavedLink(url=url, user=request.user).save()
     return redirect('URLshortener:links')
 
 
-@permission_required('URLshortener.delete_usersavedlink')
+@login_required
 def delete_link(request, pk):
     get_object_or_404(UserSavedLink, pk=pk).delete()
     return redirect('URLshortener:links')

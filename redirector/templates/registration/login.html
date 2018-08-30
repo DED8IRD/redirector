@@ -1,5 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Login{% endblock title %}
+{% block styles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'URLshortener/css/bootstrap-social.css' %}">
+{% endblock styles %}
 
 {% load bootstrap_tags %}
 {% block content %}
@@ -19,10 +24,13 @@
 
 		    {% csrf_token %}
 			{{ form|as_bootstrap }}
-			<button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>			
+
+			<button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>	
+			<hr />
+			<p class="text-center">Or</p>					
+			{% include "registration/social-auth-buttons.html" %}
 	    </form>
 
-		<a href="{% url 'social:begin' 'google-oauth2' %}">Google+</a>
 
 	</div>
 {% endblock %}

@@ -45,3 +45,12 @@ body {
 	background-color: darkred;
 	color: white;
 }
+
+.brand {
+	float: left;
+	padding-right: 12px;
+}
+
+.brand-signin {
+	float: right;
+}

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Register{% endblock title %}
-
+{% load static %}
 {% load bootstrap_tags %}
+{% block title %}Register{% endblock title %}
+{% block styles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'URLshortener/css/bootstrap-social.css' %}">
+{% endblock styles %}
+
 {% block content %}
 	<div class="container form-container w-100 h-100 input-group">
 		<form action="{% url 'register' %}" method='POST'>
