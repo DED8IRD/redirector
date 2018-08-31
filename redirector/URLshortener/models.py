@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class URL(models.Model):
-	url = models.CharField(max_length=500, unique=True)
+	url = models.URLField(unique=True)
 	code = models.CharField(max_length=50, primary_key=True)
 	created_date = models.DateTimeField(default=timezone.now)
 	access_count = models.IntegerField(default=0)
