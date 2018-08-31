@@ -26,6 +26,9 @@ class UserSavedLinkViewSet(viewsets.ModelViewSet):
 
 
 def index(request):
+    """
+    Index view with URL shortener form
+    """
     link = None
     error = None
     if request.method == 'POST':
@@ -50,6 +53,9 @@ def index(request):
 
 
 def shortened_redirect(request, code):
+    """
+    Redirects to longurl given shorturl code
+    """
     url = get_object_or_404(URL, code=code)
     url.access_count += 1
     url.save()
@@ -58,6 +64,9 @@ def shortened_redirect(request, code):
 
 @login_required
 def links(request):
+    """
+    User saved links view
+    """
     context = {
         'links': UserSavedLink.objects.filter(user=request.user),
         'base': settings.BASE_URL
@@ -67,6 +76,9 @@ def links(request):
 
 @login_required
 def save_link(request, code):
+    """
+    Saves UserSavedLink instance
+    """
     url = get_object_or_404(URL, code=code)
     UserSavedLink(url=url, user=request.user).save()
     return redirect('URLshortener:links')
@@ -74,11 +86,17 @@ def save_link(request, code):
 
 @login_required
 def delete_link(request, pk):
+    """
+    Deletes UserSavedLink instance
+    """
     get_object_or_404(UserSavedLink, pk=pk).delete()
     return redirect('URLshortener:links')
 
 
 def url_map(url):
+    """
+    Returns existing URL object if url exists in DB, else saves and returns new URL object
+    """
     if URL.objects.filter(url=url).exists():
         return URL.objects.get(url=url)
     else:
@@ -89,6 +107,9 @@ def url_map(url):
 
 
 def shorten_url(url):
+    """
+    URL shortening algorithm
+    """
     valid_chars = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890'
     while True:
         code = ''.join(random.choices(valid_chars, k=6))
