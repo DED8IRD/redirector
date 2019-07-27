@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="table-responsive-sm">
 			{% if links %}
-				<table class="table">
+				<table class="table table-responsive-sm">
 					<thead>
 						<tr>
 							<th scope="col">URL</th>
@@ -25,8 +25,8 @@
 							<td>
 								<div class="input-group">
 									<input type="text" class="form-control copy-input"
-											value="{{ base }}{{ link.url.code }}" 
-											placeholder="{{ base }}{{ link.url.code }}" />
+											value="{{ base }}/{{ link.url.code }}" 
+											placeholder="{{ base }}/{{ link.url.code }}" />
 									<div class="input-group-append">
 									    <button class="btn btn-outline-secondary copy-button" type="button" 
 												data-toggle="tooltip" data-placement="bottom"
