@@ -20,6 +20,10 @@ body {
 	border-radius: 10px;
 }
 
+.url-cell {
+	min-width: 10em;
+}
+
 .container {
 	display: flex;
 	align-items: center;
