@@ -10,6 +10,7 @@ body {
     background-attachment: fixed;
     background-position: center; 
     background-size: cover;
+	backdrop-filter: blur(5px) contrast(.8);
 }
 
 .table {
@@ -25,7 +26,6 @@ body {
 	align-items: center;
 	justify-content: center;
     vertical-align: middle;
-	backdrop-filter: blur(5px) contrast(.8);
 }
 
 .form-container {
