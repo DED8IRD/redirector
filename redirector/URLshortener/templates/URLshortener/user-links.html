@@ -4,7 +4,7 @@
 {% block title %}Links{% endblock title %}
 {% block content %}
 	<div class="container">
-		<div class="table-responsive-sm">
+		<div class="table-responsive">
 			{% if links %}
 				<table class="table">
 					<thead>
@@ -17,16 +17,16 @@
 					</thead>
 					{% for link in links %}
 						<tr>
-							<td>
+							<td class='url-cell'>
 								<input type="text" class="form-control copy-input"
 											value="{{ link.url.url }}" title="{{ link.url.url }}"
 											placeholder="{{ link.url.url }}" disabled />
 							</td>
-							<td>
+							<td class='url-cell'>
 								<div class="input-group">
 									<input type="text" class="form-control copy-input"
-											value="{{ base }}{{ link.url.code }}" 
-											placeholder="{{ base }}{{ link.url.code }}" />
+											value="{{ base }}/{{ link.url.code }}" 
+											placeholder="{{ base }}/{{ link.url.code }}" />
 									<div class="input-group-append">
 									    <button class="btn btn-outline-secondary copy-button" type="button" 
 												data-toggle="tooltip" data-placement="bottom"
